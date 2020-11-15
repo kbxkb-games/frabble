@@ -1,0 +1,61 @@
+/* ============================================================================================================== */
+/* When key starts with nothing special, it refers to the actual html tag, e.g., "body" or "ul"                   */
+/* When key starts with "#", it refers to an id, e.g., "#container" refers to the element whose id is "container" */
+/* When key starts with ".", it refers to a class, e.g., ".empty" refers to all elements whose class is "empty"   */
+/* ============================================================================================================== */
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    display: flex;
+    background-color: #114B5F;
+    text-align: center;
+    flex-direction: column;
+    padding-top: 2%;
+}
+#container {
+    /* This is the dimension of the grid... let us call it D */
+    width: 500px;
+    height: 500px;
+    background: #E4FDE1;
+    margin: 10px auto;
+}
+ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    justify-content: space-evenly;
+    font-family: 'Audiowide';
+    color: #E4FDE1;
+}
+ul li {
+    background: #456990;
+    /* This % value is slightly less than 1/15, making exactly 15 cells fit width-wise.
+     * The fact that we need some space between cells to make them look good is why
+     * the actual value of the percentage is less than 6.6667% (1/15 = 6.6667%) */ 
+    width: 6.33%;
+    /* This height is slightly less than D / 15 (where D is... see note above in
+     * #container section. The lines between the cells take up some space, hence... */
+    height: 32.25px;
+    border: 1px solid #028090;
+    margin-top: 1px;
+    /* The following two properties make the text inside the cell horizontally centered */
+    text-align: center;
+    font-size: 1rem;
+    /* The following two properties make the text inside the cell vertically centered */
+    padding-top: 1rem;
+    line-height: 1px;
+}
+.empty {
+    background: #DAD4EF;
+    border: 2px solid #114B5F;
+}
+h1 {
+    color: #E4FDE1;
+    font-family: 'Sofia';
+    text-align: center;
+
+}

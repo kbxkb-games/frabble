@@ -1,0 +1,8 @@
+rm -f out
+for x in {0..14}
+do
+	for i in {0..14}
+	do
+		echo -e "            <li id=\""$x"-"$i"\"></li>" >> out
+	done
+done
