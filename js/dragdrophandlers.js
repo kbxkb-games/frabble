@@ -36,8 +36,8 @@ const drop_handler = ev => {
     // Get the id of the target and add the moved element to the target's DOM
     const data = ev.dataTransfer.getData("text/plain");
     let draggedCell = document.getElementById(data);
-    ev.target.innerText = draggedCell.innerText;
-    draggedCell.innerText = "";
+    ev.target.innerHTML = draggedCell.innerHTML;
+    draggedCell.innerHTML = "";
 }
 
 const dragend_handler = ev => {

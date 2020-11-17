@@ -28,9 +28,12 @@ function initCellsArray()
 		window.cells[cell] = document.getElementById(getCartesianZeroBasedIdFromArrayIndex(cell));
 		//The following startup logic is just for now. Real game will not set innerTexts like this...
 		if (cell < window.numTiles)
-			cells[cell].innerText = String.fromCharCode(getCharCodeFromIndex(cell));
+		{
+			let letter = String.fromCharCode(getCharCodeFromIndex(cell));
+			cells[cell].innerHTML = getTileInnerHTML(letter);
+		}
 		else
-			cells[cell].innerText = "";
+			cells[cell].innerHTML = "";
 	}
 }
 

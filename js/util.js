@@ -81,6 +81,62 @@ function getCharCodeFromIndex(index)
 		return 63; //question mark
 }
 
+function getScoreFromLetter(letter)
+{
+	switch(letter)
+	{
+		case "A":
+		case "E":
+		case "I":
+		case "L":
+		case "N":
+		case "O":
+		case "R":
+		case "S":
+		case "T":
+		case "U":
+			return 1;
+		case "D":
+		case "G":
+			return 2;
+		case "B":
+		case "C":
+		case "M":
+		case "P":
+			return 3;
+		case "F":
+		case "H":
+		case "V":
+		case "W":
+		case "Y":
+			return 4;
+		case "K":
+			return 5;
+		case "J":
+		case "X":
+			return 8;
+		case "Q":
+		case "Z":
+			return 10;
+		default:
+			return 0;
+	}
+}
+
+function getTileInnerHTML(letter)
+{
+	if (letter.length <= 0)
+		return "";
+	let score = getScoreFromLetter(letter);
+	let retHTML = "<span class=\"primaryletter\">" + letter + "</span>";
+	if (score <= 0)
+		return retHTML;
+	//else if (score > 0 && score < 10)
+	//	return retHTML + "<span class=\"secondaryscore\"><sub>&nbsp;" + score + "</sub></span>";
+	else
+		return retHTML + "<span class=\"secondaryscore\"><sub>&nbsp;" + score + "</sub></span>";
+}
+
 function generateUUID()
 {
 	let d = new Date().getTime();//Timestamp
@@ -104,7 +160,7 @@ function generateUUID()
 
 function setDraggableDroppable(items) {
 	items.forEach(item => {
-		if(item.innerText.length <= 0) {
+		if(item.innerHTML.length <= 0) {
 			item.setAttribute("class", "empty");
 			item.setAttribute("draggable", "false");
 			item.setAttribute("ondrop", "drop_handler(event);");
