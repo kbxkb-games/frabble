@@ -127,14 +127,12 @@ function getTileInnerHTML(letter)
 {
 	if (letter.length <= 0)
 		return "";
-	let score = getScoreFromLetter(letter);
+
 	let retHTML = "<span class=\"primaryletter\">" + letter + "</span>";
-	if (score <= 0)
-		return retHTML;
-	//else if (score > 0 && score < 10)
-	//	return retHTML + "<span class=\"secondaryscore\"><sub>&nbsp;" + score + "</sub></span>";
-	else
-		return retHTML + "<span class=\"secondaryscore\"><sub>&nbsp;" + score + "</sub></span>";
+	score = getScoreFromLetter(letter);
+	if (score > 0)
+		retHTML += "<span class=\"secondaryscore\"><sub>&nbsp;" + score + "</sub></span>";
+	return retHTML;
 }
 
 function generateUUID()
