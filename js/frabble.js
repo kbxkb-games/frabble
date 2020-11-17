@@ -37,5 +37,7 @@ function initCellsArray()
 function setUp()
 {
 	initCellsArray();
-	setDraggableDroppable(window.cells);
+	window.cells.forEach(item => {
+		styleCellBasedOnContents(item);
+	});
 }

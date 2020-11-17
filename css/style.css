@@ -1,7 +1,7 @@
 /* ============================================================================================================== */
 /* When key starts with nothing special, it refers to the actual html tag, e.g., "body" or "ul"                   */
 /* When key starts with "#", it refers to an id, e.g., "#container" refers to the element whose id is "container" */
-/* When key starts with ".", it refers to a class, e.g., ".empty" refers to all elements whose class is "empty"   */
+/* When key starts with ".", it refers to a class. ".primaryletter" affects elements with class "primaryletter"   */
 /* ============================================================================================================== */
 
 * {
@@ -20,13 +20,12 @@ body {
     flex-direction: column;
     padding-top: 2%;
 }
-#sidebar, #gameplay {
+div[id^='sidebar-'], #gameplay {
     position: absolute;
     overflow:auto;
     transition: width .35s;
 }
-#sidebar {
-    /*border: 10px solid #00ff00;*/
+#sidebar-left {
     background: #114B5F;
     left: 0;
     top: 0;
@@ -39,7 +38,14 @@ body {
     left: 20%;
     top: 0;
     bottom: 0;
-    right: 0;
+    width: 60%;
+}
+#sidebar-right {
+    background: #114B5F;
+    left: 80%;
+    top: 0;
+    bottom: 0;
+    width: 20%;
 }
 #container {
     /* This is the dimension of the grid... let us call it D */
@@ -57,8 +63,6 @@ ul {
     justify-content: space-evenly;
 }
 ul li {
-    /*background: #456990;*/
-    background: #333333;
     /* This % value is slightly less than 1/15, making exactly 15 cells fit width-wise.
      * The fact that we need some space between cells to make them look good is why
      * the actual value of the percentage is less than 6.6667% (1/15 = 6.6667%) */ 
@@ -66,17 +70,7 @@ ul li {
     /* This height is slightly less than D / 15 (where D is... see note above in
      * #container section. The lines between the cells take up some space, hence... */
     height: 32.25px;
-    border: 1px solid #028090;
     margin-top: 1px;
-    /* The following two properties make the text inside the cell horizontally centered */
-    text-align: center;
-    /* The following two properties make the text inside the cell vertically centered */
-    padding-top: 1rem;
-    line-height: 1px;
-}
-.empty {
-    background: #DAD4EF;
-    border: 2px solid #114B5F;
 }
 h1 {
     color: #E4FDE1;
@@ -89,4 +83,18 @@ h4 {
     font-family: 'Goldman';
     text-align: center;
     font-size: 2em;
+}
+fieldset {
+    margin: 8px;
+    border: 1px solid silver;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+legend {
+    padding: 2px;
+    font-family: 'Goldman';
+    text-align: center;
+    font-size: 1.4em;
+    color: #DAA520;
 }

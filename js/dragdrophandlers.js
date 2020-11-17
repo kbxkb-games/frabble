@@ -38,6 +38,9 @@ const drop_handler = ev => {
     let draggedCell = document.getElementById(data);
     ev.target.innerHTML = draggedCell.innerHTML;
     draggedCell.innerHTML = "";
+    // Change the appearance and draggability/droppability of the 2 cells that just interchanged contents!
+    styleCellBasedOnContents(draggedCell);
+    styleCellBasedOnContents(ev.target);
 }
 
 const dragend_handler = ev => {
@@ -46,6 +49,4 @@ const dragend_handler = ev => {
     console.log("dragEnd");
     // Remove all of the drag data
     ev.dataTransfer.clearData();
-    // Iterate through all cells and set draggable/ droppable...
-    setDraggableDroppable(document.querySelectorAll('li'));
 }

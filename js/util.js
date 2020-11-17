@@ -158,26 +158,50 @@ function generateUUID()
 	});
 }
 
-function setDraggableDroppable(items) {
-	items.forEach(item => {
-		if(item.innerHTML.length <= 0) {
-			item.setAttribute("class", "empty");
-			item.setAttribute("draggable", "false");
-			item.setAttribute("ondrop", "drop_handler(event);");
-			item.setAttribute("ondragover", "dragover_handler(event);");
-			item.setAttribute("ondragstart", "");
-			item.setAttribute("ondragenter", "");
-			item.setAttribute("ondragleave", "");
-			item.setAttribute("ondragend", "");
-		} else {
-			item.classList.remove("empty");
-			item.setAttribute("draggable", "true");
-			item.setAttribute("ondrop", "");
-			item.setAttribute("ondragover", "");
-			item.setAttribute("ondragstart", "dragstart_handler(event);");
-			item.setAttribute("ondragenter", "dragenter_handler(event);");
-			item.setAttribute("ondragleave", "dragleave_handler(event);");
-			item.setAttribute("ondragend", "dragend_handler(event);");
-		}
-	})
+function styleCellBasedOnContents(cellDiv)
+{
+	//What defines an "empty cell"? Right now, its the length of innerHTML. Soon that will be inadequate...
+	if(cellDiv.innerHTML.length <= 0)
+	{
+		//Change the "looks"...
+		cellDiv.style.backgroundColor = "#DAD4EF";
+		cellDiv.style.border = "2px solid #114B5F";
+		cellDiv.setAttribute("text-align", "none");
+		cellDiv.setAttribute("padding-top", "0rem");
+		cellDiv.setAttribute("line-height", "0px");
+
+		//Change the drag/drop-ability...
+		cellDiv.setAttribute("draggable", "false");
+		cellDiv.setAttribute("ondrop", "drop_handler(event);");
+		cellDiv.setAttribute("ondragover", "dragover_handler(event);");
+		cellDiv.setAttribute("ondragstart", "");
+		cellDiv.setAttribute("ondragenter", "");
+		cellDiv.setAttribute("ondragleave", "");
+		cellDiv.setAttribute("ondragend", "");
+	}
+	else
+	{
+		//Change the "looks"...
+		cellDiv.style.backgroundColor = "#333333";
+		cellDiv.style.border = "1px solid #028090";
+		cellDiv.setAttribute("text-align", "center");
+		cellDiv.setAttribute("padding-top", "1rem");
+		cellDiv.setAttribute("line-height", "1px");
+
+		//Change the drag/drop-ability...
+		cellDiv.setAttribute("draggable", "true");
+		cellDiv.setAttribute("ondrop", "");
+		cellDiv.setAttribute("ondragover", "");
+		cellDiv.setAttribute("ondragstart", "dragstart_handler(event);");
+		cellDiv.setAttribute("ondragenter", "dragenter_handler(event);");
+		cellDiv.setAttribute("ondragleave", "dragleave_handler(event);");
+		cellDiv.setAttribute("ondragend", "dragend_handler(event);");
+	}
+	//let tempImage = document.createElement("img");
+	//tempImage.setAttribute("src", "https://place-hold.it/32x32/0000ff/ffffff&bold&text=$&fontsize=17");
+	//tempImage.setAttribute("alt", "$");
+	//tempImage.setAttribute("width", 32);
+	//tempImage.setAttribute("height", 32);
+	//tempImage.setAttribute("id", "[$]-" + generateUUID());
+	//item.appendChild(tempImage);
 }
