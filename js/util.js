@@ -158,15 +158,21 @@ function generateUUID()
 
 function styleCellBasedOnContents(cellDiv)
 {
+	//The following line implies that ALL style must be re-applied in both "if" and "else"...
+	cellDiv.removeAttribute('style');
+
 	//What defines an "empty cell"? Right now, its the length of innerHTML. Soon that will be inadequate...
 	if(cellDiv.innerHTML.length <= 0)
 	{
 		//Change the "looks"...
 		cellDiv.style.backgroundColor = "#DAD4EF";
 		cellDiv.style.border = "2px solid #114B5F";
-		cellDiv.setAttribute("text-align", "none");
-		cellDiv.setAttribute("padding-top", "0rem");
-		cellDiv.setAttribute("line-height", "0px");
+		cellDiv.style.paddingTop = "0px";
+		//To add an image to the "empty" cell...
+		cellDiv.style.backgroundImage = "url('https://place-hold.it/20x20/0000ff/ffffff&text=$&fontsize=10')";
+		cellDiv.style.backgroundRepeat = "no-repeat";
+		cellDiv.style.backgroundPosition = "50% 50%";
+		cellDiv.style.backgroundSize = "cover";
 
 		//Change the drag/drop-ability...
 		cellDiv.setAttribute("draggable", "false");
@@ -182,9 +188,7 @@ function styleCellBasedOnContents(cellDiv)
 		//Change the "looks"...
 		cellDiv.style.backgroundColor = "#333333";
 		cellDiv.style.border = "1px solid #028090";
-		cellDiv.setAttribute("text-align", "center");
-		cellDiv.setAttribute("padding-top", "1rem");
-		cellDiv.setAttribute("line-height", "1px");
+		cellDiv.style.paddingTop = "5px";
 
 		//Change the drag/drop-ability...
 		cellDiv.setAttribute("draggable", "true");
@@ -195,11 +199,4 @@ function styleCellBasedOnContents(cellDiv)
 		cellDiv.setAttribute("ondragleave", "dragleave_handler(event);");
 		cellDiv.setAttribute("ondragend", "dragend_handler(event);");
 	}
-	//let tempImage = document.createElement("img");
-	//tempImage.setAttribute("src", "https://place-hold.it/32x32/0000ff/ffffff&bold&text=$&fontsize=17");
-	//tempImage.setAttribute("alt", "$");
-	//tempImage.setAttribute("width", 32);
-	//tempImage.setAttribute("height", 32);
-	//tempImage.setAttribute("id", "[$]-" + generateUUID());
-	//item.appendChild(tempImage);
 }
