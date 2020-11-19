@@ -4,7 +4,9 @@ var numCellsWide = window.numCellsSquare;
 var numCellsHigh = window.numCellsSquare;
 var numCells = window.numCellsWide * window.numCellsHigh;
 var numTiles = 100;
+var numRackTiles = 7;
 var cells = new Array(window.numCells);
+var rackTiles = new Array(window.numRackTiles);
 
 function getArrayIndexFromCartesianZeroBasedId(czbId)
 {
@@ -27,10 +29,10 @@ function initCellsArray()
 	{
 		window.cells[cell] = document.getElementById(getCartesianZeroBasedIdFromArrayIndex(cell));
 		//The following startup logic is just for now. Real game will not set innerTexts like this...
-		if (cell < window.numTiles)
-			window.cells[cell].innerHTML = getTileInnerHTML(String.fromCharCode(getCharCodeFromIndex(cell)));
-		else
-			window.cells[cell].innerHTML = "";
+		//if (cell < window.numTiles)
+		//	window.cells[cell].innerHTML = getTileInnerHTML(String.fromCharCode(getCharCodeFromIndex(cell)));
+		//else
+		//	window.cells[cell].innerHTML = "";
 	}
 }
 

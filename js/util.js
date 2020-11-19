@@ -14,13 +14,25 @@ const shuffle = (arr) => {
     return copy;
 }
 
-function getArrayIndexFromCartesianZeroBasedId(czbId)
+function generateUUID()
 {
-        let rowcol = czbId.split("-");
-        let iRow = parseInt(rowcol[0]);
-        let iCol = parseInt(rowcol[1]);
-        return (iRow * numCellsSquare) + iCol;
-
+	let d = new Date().getTime();//Timestamp
+	let d2 = (performance && performance.now && (performance.now()*1000)) || 0;//Time in microseconds since page-load or 0 if unsupported
+	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c)
+	{
+		let r = Math.random() * 16;//random number between 0 and 16
+		if(d > 0)
+		{//Use timestamp until depleted
+			r = (d + r)%16 | 0;
+			d = Math.floor(d/16);
+		}
+		else
+		{//Use microseconds since page-load if supported
+			r = (d2 + r)%16 | 0;
+			d2 = Math.floor(d2/16);
+		}
+		return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+	});
 }
 
 function getCharCodeFromIndex(index)
@@ -135,25 +147,68 @@ function getTileInnerHTML(letter)
 	return retHTML;
 }
 
-function generateUUID()
+function setBackgroundImageIfEmpty(cellDiv)
 {
-	let d = new Date().getTime();//Timestamp
-	let d2 = (performance && performance.now && (performance.now()*1000)) || 0;//Time in microseconds since page-load or 0 if unsupported
-	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c)
+	let rowcol = cellDiv.getAttribute("id").split("-");
+	let iRow = parseInt(rowcol[0]);
+	let iCol = parseInt(rowcol[1]);
+	//cellDiv.style.backgroundImage = "url('https://place-hold.it/20x20/0000ff/ffffff&text=$&fontsize=10')";
+
+	if ((iRow == 0 && (iCol == 0 || iCol == 7 || iCol == 14)) ||
+		(iRow == 7 && (iCol == 0 || iCol == 14)) ||
+		(iRow == 14 && (iCol == 0 || iCol == 7 || iCol == 14)))
 	{
-		let r = Math.random() * 16;//random number between 0 and 16
-		if(d > 0)
-		{//Use timestamp until depleted
-			r = (d + r)%16 | 0;
-			d = Math.floor(d/16);
-		}
-		else
-		{//Use microseconds since page-load if supported
-			r = (d2 + r)%16 | 0;
-			d2 = Math.floor(d2/16);
-		}
-		return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-	});
+		cellDiv.style.backgroundImage = "url('images/3xword.png')";
+		cellDiv.style.backgroundRepeat = "no-repeat";
+		cellDiv.style.backgroundPosition = "50% 50%";
+		cellDiv.style.backgroundSize = "cover";
+	}
+	else if ((iRow == 1 && (iCol == 1 || iCol == 13)) || 
+		(iRow == 2 && (iCol == 2 || iCol == 12)) || 
+		(iRow == 3 && (iCol == 3 || iCol == 11)) || 
+		(iRow == 4 && (iCol == 4 || iCol == 10)) || 
+		(iRow == 10 && (iCol == 4 || iCol == 10)) || 
+		(iRow == 11 && (iCol == 3 || iCol == 11)) || 
+		(iRow == 12 && (iCol == 2 || iCol == 12)) || 
+		(iRow == 13 && (iCol == 1 || iCol == 13)))
+	{
+		cellDiv.style.backgroundImage = "url('images/2xword.png')";
+		cellDiv.style.backgroundRepeat = "no-repeat";
+		cellDiv.style.backgroundPosition = "50% 50%";
+		cellDiv.style.backgroundSize = "cover";
+	}
+	else if ((iRow == 1 && (iCol == 5 || iCol == 9)) ||
+		(iRow == 5 && (iCol == 1 || iCol == 5 || iCol == 9 || iCol == 13)) ||
+		(iRow == 9 && (iCol == 1 || iCol == 5 || iCol == 9 || iCol == 13)) ||
+		(iRow == 13 && (iCol == 5 || iCol == 9)))
+	{
+		cellDiv.style.backgroundImage = "url('images/3xletter.png')";
+		cellDiv.style.backgroundRepeat = "no-repeat";
+		cellDiv.style.backgroundPosition = "50% 50%";
+		cellDiv.style.backgroundSize = "cover";
+	}
+	else if ((iRow == 0 && (iCol == 3 || iCol == 11)) ||
+		(iRow == 2 && (iCol == 6 || iCol == 8)) ||
+		(iRow == 3 && (iCol == 0 || iCol == 7 || iCol == 14)) ||
+		(iRow == 6 && (iCol == 2 || iCol == 6 || iCol == 8 || iCol == 12)) ||
+		(iRow == 7 && (iCol == 3 || iCol == 11)) ||
+		(iRow == 8 && (iCol == 2 || iCol == 6 || iCol == 8 || iCol == 12)) ||
+		(iRow == 11 && (iCol == 0 || iCol == 7 || iCol == 14)) ||
+		(iRow == 12 && (iCol == 6 || iCol == 8)) ||
+		(iRow == 14 && (iCol == 3 || iCol == 11)))
+	{
+		cellDiv.style.backgroundImage = "url('images/2xletter.png')";
+		cellDiv.style.backgroundRepeat = "no-repeat";
+		cellDiv.style.backgroundPosition = "50% 50%";
+		cellDiv.style.backgroundSize = "cover";
+	}
+	else if (iRow == 7 && iCol == 7)
+	{
+		cellDiv.style.backgroundImage = "url('images/center.png')";
+		cellDiv.style.backgroundRepeat = "no-repeat";
+		cellDiv.style.backgroundPosition = "50% 50%";
+		cellDiv.style.backgroundSize = "cover";
+	}
 }
 
 function styleCellBasedOnContents(cellDiv)
@@ -168,11 +223,9 @@ function styleCellBasedOnContents(cellDiv)
 		cellDiv.style.backgroundColor = "#DAD4EF";
 		cellDiv.style.border = "2px solid #114B5F";
 		cellDiv.style.paddingTop = "0px";
-		//To add an image to the "empty" cell...
-		cellDiv.style.backgroundImage = "url('https://place-hold.it/20x20/0000ff/ffffff&text=$&fontsize=10')";
-		cellDiv.style.backgroundRepeat = "no-repeat";
-		cellDiv.style.backgroundPosition = "50% 50%";
-		cellDiv.style.backgroundSize = "cover";
+
+		//Add background image if it is one of the "special-score" cells...
+		setBackgroundImageIfEmpty(cellDiv);
 
 		//Change the drag/drop-ability...
 		cellDiv.setAttribute("draggable", "false");

@@ -1,5 +1,5 @@
 /* ============================================================================================================== */
-/* When key starts with nothing special, it refers to the actual html tag, e.g., "body" or "ul"                   */
+/* When key starts with nothing special, it refers to the actual html tag, e.g., "body"                           */
 /* When key starts with "#", it refers to an id, e.g., "#container" refers to the element whose id is "container" */
 /* When key starts with ".", it refers to a class. ".primaryletter" affects elements with class "primaryletter"   */
 /* ============================================================================================================== */
@@ -47,22 +47,45 @@ div[id^='sidebar-'], #gameplay {
     bottom: 0;
     width: 20%;
 }
-#container {
+.primaryletter {font-family: 'Audiowide'; font-size: 1rem; color: #E4FDE1;}
+.secondaryscore {font-family: 'Audiowide'; font-size: 0.1rem; color:  #d4ac0d;}
+#gamegrid-container {
     /* This is the dimension of the grid... let us call it D */
     width: 500px;
     height: 500px;
     background: #E4FDE1;
     margin: 10px auto;
 }
-.primaryletter {font-family: 'Audiowide'; font-size: 1rem; color: #E4FDE1;}
-.secondaryscore {font-family: 'Audiowide'; font-size: 0.1rem; color:  #d4ac0d;}
-ul {
+#gamegrid {
     display: flex;
     flex-wrap: wrap;
     list-style-type: none;
     justify-content: space-evenly;
 }
-ul li {
+#gamegrid li {
+    /* This % value is slightly less than 1/15, making exactly 15 cells fit width-wise.
+     * The fact that we need some space between cells to make them look good is why
+     * the actual value of the percentage is less than 6.6667% (1/15 = 6.6667%) */ 
+    width: 6.33%;
+    /* This height is slightly less than D / 15 (where D is... see note above in
+     * #container section. The lines between the cells take up some space, hence... */
+    height: 32.25px;
+    margin-top: 1px;
+}
+#rack-container {
+    /* This is the dimension of the grid... let us call it D */
+    width: 245px;
+    height: 35px;
+    background: #E4FDE1;
+    margin: 10px auto;
+}
+#rack {
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    justify-content: space-evenly;
+}
+#rack li {
     /* This % value is slightly less than 1/15, making exactly 15 cells fit width-wise.
      * The fact that we need some space between cells to make them look good is why
      * the actual value of the percentage is less than 6.6667% (1/15 = 6.6667%) */ 
