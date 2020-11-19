@@ -55,6 +55,7 @@ div[id^='sidebar-'], #gameplay {
     height: 500px;
     background: #E4FDE1;
     margin: 10px auto;
+    margin-bottom: 50px;
 }
 #gamegrid {
     display: flex;
@@ -75,9 +76,10 @@ div[id^='sidebar-'], #gameplay {
 #rack-container {
     /* This is the dimension of the grid... let us call it D */
     width: 245px;
-    height: 35px;
+    height: 34px;
     background: #E4FDE1;
     margin: 10px auto;
+    box-shadow: 5px 5px #36454f;
 }
 #rack {
     display: flex;
@@ -86,10 +88,10 @@ div[id^='sidebar-'], #gameplay {
     justify-content: space-evenly;
 }
 #rack li {
-    /* This % value is slightly less than 1/15, making exactly 15 cells fit width-wise.
+    /* This % value is slightly less than 1/7, making exactly 7 cells fit width-wise.
      * The fact that we need some space between cells to make them look good is why
-     * the actual value of the percentage is less than 6.6667% (1/15 = 6.6667%) */ 
-    width: 6.33%;
+     * the actual value of the percentage is less than (1/7) */ 
+    width: 13.8%;
     /* This height is slightly less than D / 15 (where D is... see note above in
      * #container section. The lines between the cells take up some space, hence... */
     height: 32.25px;

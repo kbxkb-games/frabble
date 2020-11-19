@@ -150,9 +150,9 @@ function getTileInnerHTML(letter)
 function setBackgroundImageIfEmpty(cellDiv)
 {
 	let rowcol = cellDiv.getAttribute("id").split("-");
+	if (isNaN(rowcol[0])) return;
 	let iRow = parseInt(rowcol[0]);
 	let iCol = parseInt(rowcol[1]);
-	//cellDiv.style.backgroundImage = "url('https://place-hold.it/20x20/0000ff/ffffff&text=$&fontsize=10')";
 
 	if ((iRow == 0 && (iCol == 0 || iCol == 7 || iCol == 14)) ||
 		(iRow == 7 && (iCol == 0 || iCol == 14)) ||
@@ -209,6 +209,7 @@ function setBackgroundImageIfEmpty(cellDiv)
 		cellDiv.style.backgroundPosition = "50% 50%";
 		cellDiv.style.backgroundSize = "cover";
 	}
+	//cellDiv.style.backgroundImage = "url('https://place-hold.it/20x20/0000ff/ffffff&text=$&fontsize=10')";
 }
 
 function styleCellBasedOnContents(cellDiv)

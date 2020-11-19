@@ -4,9 +4,9 @@ var numCellsWide = window.numCellsSquare;
 var numCellsHigh = window.numCellsSquare;
 var numCells = window.numCellsWide * window.numCellsHigh;
 var numTiles = 100;
-var numRackTiles = 7;
+var numRackCells = 7;
 var cells = new Array(window.numCells);
-var rackTiles = new Array(window.numRackTiles);
+var rackCells = new Array(window.numRackCells);
 
 function getArrayIndexFromCartesianZeroBasedId(czbId)
 {
@@ -28,11 +28,12 @@ function initCellsArray()
 	for (let cell = 0; cell < window.numCells; cell++)
 	{
 		window.cells[cell] = document.getElementById(getCartesianZeroBasedIdFromArrayIndex(cell));
-		//The following startup logic is just for now. Real game will not set innerTexts like this...
 		//if (cell < window.numTiles)
 		//	window.cells[cell].innerHTML = getTileInnerHTML(String.fromCharCode(getCharCodeFromIndex(cell)));
-		//else
-		//	window.cells[cell].innerHTML = "";
+	}
+	for (let rackCell = 0; rackCell < window.numRackCells; rackCell++)
+	{
+		window.rackCells[rackCell] = document.getElementById("r-" + rackCell);
 	}
 }
 
@@ -41,5 +42,12 @@ function setUp()
 	initCellsArray();
 	window.cells.forEach(item => {
 		styleCellBasedOnContents(item);
+	});
+	//for (let rackCell = 0; rackCell < window.numRackCells; rackCell++)
+	//{
+	//	styleCellBasedOnContents(window.rackCells[rackCell]);
+	//}
+	window.rackCells.forEach(rItem => {
+		styleCellBasedOnContents(rItem);
 	});
 }
