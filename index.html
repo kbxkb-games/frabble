@@ -9,6 +9,7 @@
     <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Goldman' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Cairo' rel='stylesheet'>
     <title>Sliding Tile Puzzle</title>
 </head>
 
@@ -18,7 +19,13 @@
         <h6>&nbsp;</h6>
         <fieldset>
             <legend>Start New Game</legend>
-            <input type="text" />
+            <div class="start-new-game-div">
+                <label>Player 1</label>
+                <input id="player-1" style="font-family: 'Cairo'; font-size: 10px; width: 85%;" type="text" onkeydown="playerOneKeyDown(event);"/>
+                <label>Player 2</label>
+                <input id="player-2" style="font-family: 'Cairo'; font-size: 10px; width: 85%;" type="text" /onkeydown="playerTwoKeyDown(event);">
+            </div>
+	    <input class="frutton" type="button" value="New Game" onclick="newGame();"/>
         </fieldset>
     </div>
     <div id="gameplay">
@@ -269,9 +276,11 @@
     <div id="sidebar-right">
         <h6>&nbsp;</h6>
         <h6>&nbsp;</h6>
-        <fieldset>
-            <legend>Start New Game</legend>
-            <input type="text" />
+        <fieldset id="player1-stats">
+            <legend></legend>
+        </fieldset>
+        <fieldset id="player2-stats">
+            <legend></legend>
         </fieldset>
     </div>
     <script src="js/util.js"></script>

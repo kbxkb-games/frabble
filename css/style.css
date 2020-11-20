@@ -123,3 +123,44 @@ legend {
     font-size: 1.4em;
     color: #DAA520;
 }
+div.start-new-game-div {
+    display:grid;
+    grid-template-columns: max-content max-content;
+    grid-gap:15px;
+    margin-bottom: 25px;
+    padding-top: 10px;
+}
+div.start-new-game-div label
+{
+    color: #DAA520;
+    font-family: 'Goldman';
+    text-align:right;
+}
+div.start-new-game-div label:after { content: ":"; }
+.frutton {
+    border: 0;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-family: 'Goldman';
+    font-size: 0.75rem;
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: rgba(220, 0, 0, 0.5);
+    background-image: linear-gradient(to top left,
+                                      rgba(0, 0, 0, .2),
+                                      rgba(0, 0, 0, .2) 30%,
+                                      rgba(0, 0, 0, 0));
+    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6),
+                inset -2px -2px 3px rgba(0, 0, 0, .6);
+}
+
+.frutton:hover {
+    background-color: rgba(212, 175, 55, 1);
+}
+
+.frutton:active {
+    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+                inset 2px 2px 3px rgba(0, 0, 0, .6);
+}
