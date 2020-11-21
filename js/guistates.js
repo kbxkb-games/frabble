@@ -7,6 +7,47 @@ var controls =
 	uiGameButton: document.getElementById("gameLifecycleButton"),
 };
 
+var sackOTiles =
+{
+	sack: new Map(),
+	numTilesLeft: 100,
+	initialize: function()
+	{
+		this.sack.set("A", 9);
+		this.sack.set("B", 2);
+		this.sack.set("C", 2);
+		this.sack.set("D", 4);
+		this.sack.set("E", 12);
+		this.sack.set("F", 2);
+		this.sack.set("G", 3);
+		this.sack.set("H", 2);
+		this.sack.set("I", 9);
+		this.sack.set("J", 1);
+		this.sack.set("K", 1);
+		this.sack.set("L", 4);
+		this.sack.set("M", 2);
+		this.sack.set("N", 6);
+		this.sack.set("O", 8);
+		this.sack.set("P", 2);
+		this.sack.set("Q", 1);
+		this.sack.set("R", 6);
+		this.sack.set("S", 4);
+		this.sack.set("T", 6);
+		this.sack.set("U", 4);
+		this.sack.set("V", 2);
+		this.sack.set("W", 2);
+		this.sack.set("X", 1);
+		this.sack.set("Y", 2);
+		this.sack.set("Z", 1);
+	},
+	draw: function()
+	{
+		if (this.numTilesLeft <= 0)
+			return "!";
+		//TODO: Finish this, may be change map to array for each of shuffling? Search for "javascript Fisher–Yates Shuffle"
+	}
+};
+
 var readyState =
 {
 	focusOn: controls.uiPlayer1Text,
