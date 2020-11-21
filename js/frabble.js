@@ -86,6 +86,7 @@ function newGame()
 	{
 		alert("Please enter a name for Player 1");
 		readyState.namePlayer1 = player1;
+		readyState.namePlayer2 = player2;
 		readyState.focusOn = controls.uiPlayer1Text;
 		readyState.enforce();
 		return;
@@ -93,6 +94,7 @@ function newGame()
 	if (player2 === "")
 	{
 		alert("Please enter a name for Player 2");
+		readyState.namePlayer1 = player1;
 		readyState.namePlayer2 = player2;
 		readyState.focusOn = controls.uiPlayer2Text;
 		readyState.enforce();
@@ -113,8 +115,11 @@ function newGame()
 	gameOnState.playerOne.name = player1;
 	gameOnState.playerTwo.name = player2;
 	gameOnState.playerOne.score = gameOnState.playerTwo.score = 0;
-	gameOnState.playerOne.plays.set("HJGDFYGYWE", 78);
-	gameOnState.playerOne.plays.set("HJGDFYGYWEHYRYT857689595HUIRHRI58T95U8559TH58958UT895675TYH8955", 78);
-	gameOnState.enforce();
+	gameOnState.enforce(false);
 	alert("Pass to " + player1);
+
+	//TO add a played word to play log:
+	//gameOnState.playerOne.addPlay("HJGDFYGYWE", 90);
+	//gameOnState.playerTwo.addPlay("HOWZZAT", 150);
+	//gameOnState.enforce(true);
 }

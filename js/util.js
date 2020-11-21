@@ -46,7 +46,6 @@ function justifyPlay(word, score, len)
 		for (let x = 1; x <= numCharsForWordAndSpace - word.length; x++)
 		{
 			ret += "&nbsp;";
-			alert(ret)
 		}
 		ret += score.toString();
 		return ret;

@@ -34,32 +34,52 @@ var gameOnState =
 	{
 		name: "",
 		score: 0,
-		plays: new Map()
+		plays: new Map(),
+		addPlay: function(addWord, addScore)
+		{
+			if(this.plays.has(addWord))
+				addWord = addWord + "*";
+			this.plays.set(addWord, addScore);
+		}
 	},
 	playerTwo:
 	{
 		name: "",
 		score: 0,
-		plays: new Map()
+		plays: new Map(),
+		addPlay: function(addWord, addScore)
+		{
+			if(this.plays.has(addWord))
+				addWord = addWord + "*";
+			this.plays.set(addWord, addScore);
+		}
 	},
-	__divSelectStart: "<div style=\"padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px;\"> <select style=\"text-align: left; width: 99%;\" size=\"15\">",
+	__divSelectStart: "<div style=\"padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px;\"> <select style=\"text-align: left; width: 99%; background-color: #192841; color: #F6E8B1; overflow-y: auto;\" size=\"15\">",
 	__divSelectEnd: "</select> </div>",
-	enforce: function()
+	enforce: function(updatePlayLogOnly)
 	{
-		alert("gameOnState.enforce() called");
+		let ih = "<legend>" + this.playerOne.name + " - " + this.playerOne.score + "</legend>";
+		ih += this.__divSelectStart;
+		for (let [key1, value1] of this.playerOne.plays)
+		{
+			ih += "<option style=\"font-family: Inconsolata;\" value=\"" + key1 + "\">" + justifyPlay(key1, value1, 28) + "</option>";
+		}
+		ih += this.__divSelectEnd;
+		controls.uiPlayer1Stats.innerHTML = ih;
+
+		ih = "<legend>" + this.playerTwo.name + " - " + this.playerTwo.score + "</legend>";
+		ih += this.__divSelectStart;
+		for (let [key2, value2] of this.playerTwo.plays)
+		{
+			ih += "<option style=\"font-family: Inconsolata;\" value=\"" + key2 + "\">" + justifyPlay(key2, value2, 28) + "</option>";
+		}
+		ih += this.__divSelectEnd;
+		controls.uiPlayer2Stats.innerHTML = ih;
+		if (updatePlayLogOnly) return;
+		
 		controls.uiPlayer1Text.disabled = true;
 		controls.uiPlayer2Text.disabled = true;
 		controls.uiGameButton.setAttribute("value", "Abort Game");
-
-		let ih = "<legend>" + this.playerOne.name + " - " + this.playerOne.score + "</legend>";
-		ih += this.__divSelectStart;
-		for (let [key, value] of this.playerOne.plays)
-		{
-			ih += "<option style=\"font-family: VT323\" value=\"" + key + "\">" + justifyPlay(key, value, 35) + "</option>";
-		}
-		ih += this.__divSelectEnd;
-
-		controls.uiPlayer1Stats.innerHTML = ih;
 		controls.uiPlayer1Stats.style.display = "block";
 		controls.uiPlayer2Stats.style.display = "block";
 	},
@@ -67,5 +87,7 @@ var gameOnState =
 	{
 		this.playerOne.name = this.playerTwo.name = "";
 		this.playerOne.score = this.playerTwo.score = 0;
+		this.playerOne.plays.clear();
+		this.playerTwo.plays.clear();
 	}
 };
