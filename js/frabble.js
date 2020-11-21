@@ -8,6 +8,8 @@ var numRackCells = 7;
 var cells = new Array(window.numCells);
 var rackCells = new Array(window.numRackCells);
 var isGameOngoing = false;
+var playerOneName = "";
+var playerTwoName = "";
 
 function getArrayIndexFromCartesianZeroBasedId(czbId)
 {
@@ -47,11 +49,9 @@ function setUp()
 	window.rackCells.forEach(rItem => {
 		styleCellBasedOnContents(rItem);
 	});
-	let player1Stats = document.getElementById("player1-stats");
-	player1Stats.style.display = "none";
-	let player2Stats = document.getElementById("player2-stats");
-	player2Stats.style.display = "none";
-	document.getElementById("player-1").focus();
+	window.playerOneName = "";
+	window.playerTwoName = "";
+	readyState.enforce();
 }
 
 function playerOneKeyDown(e)
@@ -70,59 +70,57 @@ function playerTwoKeyDown(e)
 
 function newGame()
 {
-	let player1Stats = document.getElementById("player1-stats");
-	let player2Stats = document.getElementById("player2-stats");
-	let player1Text = document.getElementById("player-1");
-	let player2Text = document.getElementById("player-2");
 	if (window.isGameOngoing)
 	{
 		if (confirm("Press OK to abort ongoing game"))
 		{
-			player1Stats.style.display = "none";
-			player2Stats.style.display = "none";
 			window.isGameOngoing = false;
-			player1Text.focus();
-			newGame();
+			readyState.namePlayer1 = window.playerOneName;
+			readyState.namePlayer2 = window.playerTwoName;
+			readyState.focusOn = controls.uiPlayer1Text;
+			window.playerOneName = "";
+			window.playerTwoName = "";
+			readyState.enforce();
 		}
 		return;
 	}
 
-	let player1 = player1Text.value.trim();
-	let player2 = player2Text.value.trim();
+	window.playerOneName = "";
+	window.playerTwoName = "";
+	let player1 = controls.uiPlayer1Text.value.trim();
+	let player2 = controls.uiPlayer2Text.value.trim();
 	if (player1 === "")
 	{
 		alert("Please enter a name for Player 1");
-		player1Text.value = player1;
-		player1Text.focus();
-		player1Text.setSelectionRange(0, player1Text.value.length);
+		readyState.namePlayer1 = player1;
+		readyState.focusOn = controls.uiPlayer1Text;
+		readyState.enforce();
 		return;
 	}
 	if (player2 === "")
 	{
 		alert("Please enter a name for Player 2");
-		player2Text.value = player2;
-		player2Text.focus();
-		player2Text.setSelectionRange(0, player2Text.value.length);
+		readyState.namePlayer2 = player2;
+		readyState.focusOn = controls.uiPlayer2Text;
+		readyState.enforce();
 		return;
 	}
 	if (player1 == player2)
 	{
 		alert("Please enter different names for the players!");
-		player2Text.value = player2;
-		player1Text.value = player1;
-		player1Text.focus();
-		player1Text.setSelectionRange(0, player1Text.value.length);
+		readyState.namePlayer1 = player1;
+		readyState.namePlayer2 = player2;
+		readyState.focusOn = controls.uiPlayer1Text;
+		readyState.enforce();
 		return;
 	}
 
 	//game on!
 	window.isGameOngoing = true;
-	player1Text.value = "";
-	player2Text.value = "";
-	player1Stats.innerHTML = "<legend>" + player1 + "</legend>";
-	player1Stats.style.display = "block";
-	player2Stats.innerHTML = "<legend>" + player2 + "</legend>";
-	player2Stats.style.display = "block";
+	window.playerOneName = player1;
+	window.playerTwoName = player2;
+	gameOnState.namePlayer1 = window.playerOneName;
+	gameOnState.namePlayer2 = window.playerTwoName;
+	gameOnState.enforce();
 	alert("Pass to " + player1);
-	player1Text.focus();
 }

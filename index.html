@@ -25,7 +25,7 @@
                 <label>Player 2</label>
                 <input id="player-2" style="font-family: 'Cairo'; font-size: 10px; width: 85%;" type="text" /onkeydown="playerTwoKeyDown(event);">
             </div>
-	    <input class="frutton" type="button" value="New Game" onclick="newGame();"/>
+	    <input id="gameLifecycleButton" class="frutton" type="button" value="" onclick="newGame();"/>
         </fieldset>
     </div>
     <div id="gameplay">
@@ -284,6 +284,7 @@
         </fieldset>
     </div>
     <script src="js/util.js"></script>
+    <script src="js/guistates.js"></script>
     <script src="js/frabble.js"></script>
     <script src="js/dragdrophandlers.js"></script>
 </body>
