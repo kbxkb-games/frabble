@@ -35,6 +35,24 @@ function generateUUID()
 	});
 }
 
+function justifyPlay(word, score, len)
+{
+	let numCharsForWordAndSpace = len - score.toString().length;
+	if (word.length > numCharsForWordAndSpace)
+		return word.substring(0, numCharsForWordAndSpace - 3) + "..." + score.toString();
+	else
+	{
+		let ret = word;
+		for (let x = 1; x <= numCharsForWordAndSpace - word.length; x++)
+		{
+			ret += "&nbsp;";
+			alert(ret)
+		}
+		ret += score.toString();
+		return ret;
+	}
+}
+
 function getCharCodeFromIndex(index)
 {
 	if (index < 9)

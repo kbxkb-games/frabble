@@ -8,8 +8,6 @@ var numRackCells = 7;
 var cells = new Array(window.numCells);
 var rackCells = new Array(window.numRackCells);
 var isGameOngoing = false;
-var playerOneName = "";
-var playerTwoName = "";
 
 function getArrayIndexFromCartesianZeroBasedId(czbId)
 {
@@ -49,8 +47,6 @@ function setUp()
 	window.rackCells.forEach(rItem => {
 		styleCellBasedOnContents(rItem);
 	});
-	window.playerOneName = "";
-	window.playerTwoName = "";
 	readyState.enforce();
 }
 
@@ -72,21 +68,18 @@ function newGame()
 {
 	if (window.isGameOngoing)
 	{
-		if (confirm("Press OK to abort ongoing game"))
+		if (confirm("Game already in Progress! Press OK to abort ongoing game"))
 		{
 			window.isGameOngoing = false;
-			readyState.namePlayer1 = window.playerOneName;
-			readyState.namePlayer2 = window.playerTwoName;
+			readyState.namePlayer1 = gameOnState.playerOne.name;
+			readyState.namePlayer2 = gameOnState.playerTwo.name;
 			readyState.focusOn = controls.uiPlayer1Text;
-			window.playerOneName = "";
-			window.playerTwoName = "";
+			gameOnState.reset();
 			readyState.enforce();
 		}
 		return;
 	}
 
-	window.playerOneName = "";
-	window.playerTwoName = "";
 	let player1 = controls.uiPlayer1Text.value.trim();
 	let player2 = controls.uiPlayer2Text.value.trim();
 	if (player1 === "")
@@ -117,10 +110,11 @@ function newGame()
 
 	//game on!
 	window.isGameOngoing = true;
-	window.playerOneName = player1;
-	window.playerTwoName = player2;
-	gameOnState.namePlayer1 = window.playerOneName;
-	gameOnState.namePlayer2 = window.playerTwoName;
+	gameOnState.playerOne.name = player1;
+	gameOnState.playerTwo.name = player2;
+	gameOnState.playerOne.score = gameOnState.playerTwo.score = 0;
+	gameOnState.playerOne.plays.set("HJGDFYGYWE", 78);
+	gameOnState.playerOne.plays.set("HJGDFYGYWEHYRYT857689595HUIRHRI58T95U8559TH58958UT895675TYH8955", 78);
 	gameOnState.enforce();
 	alert("Pass to " + player1);
 }
