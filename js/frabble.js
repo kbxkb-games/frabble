@@ -6,7 +6,6 @@ var numCells = window.numCellsWide * window.numCellsHigh;
 var numRackCells = 7;
 var cells = new Array(window.numCells);
 var rackCells = new Array(window.numRackCells);
-var isGameOngoing = false;
 
 function getArrayIndexFromCartesianZeroBasedId(czbId)
 {
@@ -65,11 +64,10 @@ function playerTwoKeyDown(e)
 
 function newGame()
 {
-	if (window.isGameOngoing)
+	if (gameOnState.isGameOn())
 	{
 		if (confirm("Game already in Progress! Press OK to abort ongoing game"))
 		{
-			window.isGameOngoing = false;
 			readyState.namePlayer1 = gameOnState.playerOne.name;
 			readyState.namePlayer2 = gameOnState.playerTwo.name;
 			readyState.focusOn = controls.uiPlayer1Text;
@@ -110,10 +108,10 @@ function newGame()
 	}
 
 	//game on!
-	window.isGameOngoing = true;
 	gameOnState.playerOne.name = player1;
 	gameOnState.playerTwo.name = player2;
 	gameOnState.playerOne.score = gameOnState.playerTwo.score = 0;
+	gameOnState.currPlayer = 1;
 	gameOnState.enforce(false);
 	sackOTiles.initialize();
 	alert("Pass to " + player1);
@@ -122,4 +120,8 @@ function newGame()
 	//gameOnState.playerOne.addPlay("HJGDFYGYWE", 90);
 	//gameOnState.playerTwo.addPlay("HOWZZAT", 150);
 	//gameOnState.enforce(true);
+	
+	//NEXT: Inside gameOnState, just added currPlayer, set it to 1 above
+	//Next, add array tiles inside gameOnState.playerOne and .playerTwo, populate the array, and create
+	//mechanism for oscillation during gameplay, add display of tiles in gameOnState.enforce()
 }

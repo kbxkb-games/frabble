@@ -126,6 +126,7 @@ var gameOnState =
 			this.plays.set(addWord, addScore);
 		}
 	},
+	currPlayer: 0,
 	__divSelectStart: "<div style=\"padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px;\"> <select style=\"text-align: left; width: 99%; background-color: #192841; color: #F6E8B1; overflow-y: auto;\" size=\"15\">",
 	__divSelectEnd: "</select> </div>",
 	enforce: function(updatePlayLogOnly)
@@ -157,9 +158,14 @@ var gameOnState =
 	},
 	reset: function()
 	{
+		this.currPlayer = 0;
 		this.playerOne.name = this.playerTwo.name = "";
 		this.playerOne.score = this.playerTwo.score = 0;
 		this.playerOne.plays.clear();
 		this.playerTwo.plays.clear();
+	},
+	isGameOn: function()
+	{
+		return (this.playerOne.name.length > 0);
 	}
 };
