@@ -1,3 +1,4 @@
+var numTiles = 100;
 var controls =
 {
 	uiPlayer1Stats: document.getElementById("player1-stats"),
@@ -9,42 +10,72 @@ var controls =
 
 var sackOTiles =
 {
-	sack: new Map(),
-	numTilesLeft: 100,
+	counts: new Map(),
+	sack: new Array(numTiles),
+	numTilesLeft: numTiles,
+	reset: function()
+	{
+		let i = 0;
+		let alpha = "A";
+		let freq = 0;
+		for(let c = 65; c <= 90; c++)
+		{
+			alpha = String.fromCharCode(c);
+			freq = i + this.counts.get(alpha);
+			for(; i < freq; i++)
+			{
+				this.sack[i] = alpha;
+			}
+		}
+		this.sack[i] = this.sack[i+1] = "?";
+		shuffle(this.sack);
+	},
 	initialize: function()
 	{
-		this.sack.set("A", 9);
-		this.sack.set("B", 2);
-		this.sack.set("C", 2);
-		this.sack.set("D", 4);
-		this.sack.set("E", 12);
-		this.sack.set("F", 2);
-		this.sack.set("G", 3);
-		this.sack.set("H", 2);
-		this.sack.set("I", 9);
-		this.sack.set("J", 1);
-		this.sack.set("K", 1);
-		this.sack.set("L", 4);
-		this.sack.set("M", 2);
-		this.sack.set("N", 6);
-		this.sack.set("O", 8);
-		this.sack.set("P", 2);
-		this.sack.set("Q", 1);
-		this.sack.set("R", 6);
-		this.sack.set("S", 4);
-		this.sack.set("T", 6);
-		this.sack.set("U", 4);
-		this.sack.set("V", 2);
-		this.sack.set("W", 2);
-		this.sack.set("X", 1);
-		this.sack.set("Y", 2);
-		this.sack.set("Z", 1);
+		this.counts.set("A", 9);
+		this.counts.set("B", 2);
+		this.counts.set("C", 2);
+		this.counts.set("D", 4);
+		this.counts.set("E", 12);
+		this.counts.set("F", 2);
+		this.counts.set("G", 3);
+		this.counts.set("H", 2);
+		this.counts.set("I", 9);
+		this.counts.set("J", 1);
+		this.counts.set("K", 1);
+		this.counts.set("L", 4);
+		this.counts.set("M", 2);
+		this.counts.set("N", 6);
+		this.counts.set("O", 8);
+		this.counts.set("P", 2);
+		this.counts.set("Q", 1);
+		this.counts.set("R", 6);
+		this.counts.set("S", 4);
+		this.counts.set("T", 6);
+		this.counts.set("U", 4);
+		this.counts.set("V", 2);
+		this.counts.set("W", 2);
+		this.counts.set("X", 1);
+		this.counts.set("Y", 2);
+		this.counts.set("Z", 1);
+		this.counts.set("?", 2);
+		this.reset();
 	},
 	draw: function()
 	{
 		if (this.numTilesLeft <= 0)
 			return "!";
-		//TODO: Finish this, may be change map to array for each of shuffling? Search for "javascript Fisher–Yates Shuffle"
+		let randomIndex = randomInclusive(0, this.numTilesLeft - 1);
+		let drawn = this.sack[randomIndex];
+		this.sack[randomIndex] = "!";
+		for(let i = randomIndex; i <= this.numTilesLeft - 2; i++)
+		{
+			let temp = this.sack[i+1];
+			this.sack[i+1] = this.sack[i];
+			this.sack[i] = temp;
+		}
+		this.numTilesLeft -= 1;
+		return drawn;
 	}
 };
 

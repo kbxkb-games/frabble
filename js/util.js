@@ -1,23 +1,30 @@
-//Useful function we may need later... it shuffles an array and returns the shuffled array
-// shuffle the array
-const shuffle = (arr) => {
-    const copy = [...arr];
-    // loop over the array
-    for(let i = 0; i < copy.length; i++) {
-        // for each index,i pick a random index j 
-        let j = parseInt(Math.random()*copy.length);
-        // swap elements at i and j
-        let temp = copy[i];
-        copy[i] = copy[j];
-        copy[j] = temp;
-    }   
-    return copy;
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+function randomInclusive(minimum, maximum){
+    return Math.round( Math.random() * (maximum - minimum) + minimum);
 }
 
 function generateUUID()
 {
 	let d = new Date().getTime();//Timestamp
-	let d2 = (performance && performance.now && (performance.now()*1000)) || 0;//Time in microseconds since page-load or 0 if unsupported
+	let d2 = (performance && performance.now && (performance.now()*1000)) || 0;//Time in ms since page-load or 0 if unsupported
 	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c)
 	{
 		let r = Math.random() * 16;//random number between 0 and 16

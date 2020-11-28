@@ -3,7 +3,6 @@ var numCellsSquare = 15;
 var numCellsWide = window.numCellsSquare;
 var numCellsHigh = window.numCellsSquare;
 var numCells = window.numCellsWide * window.numCellsHigh;
-var numTiles = 100;
 var numRackCells = 7;
 var cells = new Array(window.numCells);
 var rackCells = new Array(window.numRackCells);
@@ -29,13 +28,13 @@ function initCellsArray()
 	for (let cell = 0; cell < window.numCells; cell++)
 	{
 		window.cells[cell] = document.getElementById(getCartesianZeroBasedIdFromArrayIndex(cell));
-		//if (cell < window.numTiles)
-		//	window.cells[cell].innerHTML = getTileInnerHTML(String.fromCharCode(getCharCodeFromIndex(cell)));
 	}
 	for (let rackCell = 0; rackCell < window.numRackCells; rackCell++)
 	{
 		window.rackCells[rackCell] = document.getElementById("r-" + rackCell);
 	}
+	//sackOTiles.initialize();
+	//window.cells[randomInclusive(0, window.numCells)].innerHTML = getTileInnerHTML(sackOTiles.draw());
 }
 
 function setUp()
@@ -116,6 +115,7 @@ function newGame()
 	gameOnState.playerTwo.name = player2;
 	gameOnState.playerOne.score = gameOnState.playerTwo.score = 0;
 	gameOnState.enforce(false);
+	sackOTiles.initialize();
 	alert("Pass to " + player1);
 
 	//TO add a played word to play log:
